@@ -5,4 +5,13 @@
 //  Created by Aleksandar Stojanovic on 4/5/22.
 //
 
-import Foundation
+import UIKit
+
+final class DetailsViewController: UIViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.backgroundColor = .lightGray
+    }
+}
