@@ -9,17 +9,16 @@ import UIKit
 import MapKit
 
 final class DetailsViewController: UIViewController, MKMapViewDelegate {
-    @IBOutlet var image: UIImageView!
-    @IBOutlet var name: UILabel!
-    @IBOutlet var category: UILabel!
-    @IBOutlet var address: UILabel!
-    @IBOutlet var phone: UILabel!
-    @IBOutlet var social: UILabel!
+    @IBOutlet var imageView: UIImageView!
+    @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var categoryLabel: UILabel!
+    @IBOutlet var addressLabel: UILabel!
+    @IBOutlet var phoneLabel: UILabel!
+    @IBOutlet var socialLabel: UILabel!
     @IBOutlet var mapKitView: MKMapView!
     
-    var restaurant: RestaurantsModel?
-    
-    
+    var restaurant: Restaurant?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
@@ -30,17 +29,20 @@ final class DetailsViewController: UIViewController, MKMapViewDelegate {
     
     func updateUI() {
         
-        self.name.text = restaurant?.restaurantsName
-        self.category.text = restaurant?.restaurantsCategory
-        self.address.text = restaurant?.location.address
-        self.phone.text = restaurant?.contact?.formattedPhone
-        self.social.text = restaurant?.contact?.twitter
+        self.imageView.image = restaurant?.bgImage
+        self.nameLabel.text = restaurant?.name
+        self.categoryLabel.text = restaurant?.category
+        self.addressLabel.text = restaurant?.location.address
+        self.phoneLabel.text = restaurant?.contact?.formattedPhone
+        self.socialLabel.text = restaurant?.contact?.twitter
     }
     
     func updateMap() {
+        guard let restaurant = restaurant
+        else {return}
         
-        let lattitude: CLLocationDegrees = (restaurant?.location.lat)!
-        let longitude: CLLocationDegrees = (restaurant?.location.lng)!
+        let longitude: CLLocationDegrees = restaurant.location.lng
+        let lattitude: CLLocationDegrees = restaurant.location.lat
         
         let latDelta: CLLocationDegrees = 0.01
         let lonDelta: CLLocationDegrees = 0.01
@@ -52,10 +54,10 @@ final class DetailsViewController: UIViewController, MKMapViewDelegate {
         
         let annotation = MKPointAnnotation()
         annotation.coordinate = center
-        annotation.title = restaurant?.restaurantsName
+        annotation.title = restaurant.name
         
         mapKitView.addAnnotation(annotation)
         mapKitView.setRegion(location, animated: true)
     }
-        
+    
 }

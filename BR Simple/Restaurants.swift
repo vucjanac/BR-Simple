@@ -9,15 +9,16 @@ import Foundation
 import UIKit
 
 struct Restaurants: Codable {
-    let restaurants:[RestaurantsModel]
+    let restaurants: [Restaurant]
 }
 
-struct RestaurantsModel: Codable {
-    let restaurantsName: String
-    let restaurantsCategory: String
+// MARK: - Restaurant
+struct Restaurant: Codable {
+    let name: String
     let backgroundImageURL: String
-    let contact: RestaurantContact?
-    let location: RestaurantLocation
+    let category: String
+    let contact: Contact?
+    let location: Location
     
     var bgImage: UIImage {
         if let url = URL(string: backgroundImageURL),
@@ -27,37 +28,23 @@ struct RestaurantsModel: Codable {
             return UIImage()
         }
     }
-    
 }
 
-struct RestaurantLocation: Codable {
+// MARK: - Contact
+struct Contact: Codable {
+    let phone, formattedPhone: String
+    let twitter, facebook, facebookUsername, facebookName: String?
+}
+
+// MARK: - Location
+struct Location: Codable {
     let address: String
     let crossStreet: String?
-    let lat: Double
-    let lng: Double
+    let lat, lng: Double
     let postalCode: String?
     let cc: String
     let city: String
     let state: String
     let country: String
     let formattedAddress: [String]
-}
-
-struct RestaurantContact: Codable {
-    let phone: String
-    let formattedPhone: String
-    let twitter: String?
-    let facebook: String?
-    let facebookUsername: String?
-    let facebookName : String?
-    
-}
-
-
-enum CodingKeys: String, CodingKey {
-    case restaurantsName = "name"
-    case restaurantsCategory = "category"
-    case backgroundImageURL
-    case RestaurantLocation
-    case RestaurantContact
 }
