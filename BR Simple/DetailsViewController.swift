@@ -24,7 +24,7 @@ final class DetailsViewController: UIViewController, MKMapViewDelegate {
         updateUI()
         updateMap()
         
-        view.backgroundColor = .lightGray
+        navigationController?.isNavigationBarHidden = false
     }
     
     func updateUI() {

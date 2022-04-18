@@ -35,6 +35,11 @@ class TableViewController: UITableViewController {
         
         tableView.estimatedRowHeight = 160
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = true
+    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return restaurants.count
@@ -50,7 +55,7 @@ class TableViewController: UITableViewController {
         let gradient = CAGradientLayer()
         gradient.frame = cell.gradientView.bounds
         gradient.colors = [UIColor.white.cgColor, UIColor.black.cgColor]
-        gradient.opacity = 0.2
+        gradient.opacity = 0.3
         cell.gradientView.layer.insertSublayer(gradient, at: 0)
                 
         
